@@ -81,5 +81,7 @@ class ChatSocketTest {
         MessageDTO messageDTO = new MessageDTO();
         chatSocket.sendMessage(List.of("user1"), "chatId", messageDTO);
 
+        verify(asyncRemote, times(1))
+                .sendObject(any(WebsocketHelperDTO.class), any(SendHandler.class));
     }
 }
