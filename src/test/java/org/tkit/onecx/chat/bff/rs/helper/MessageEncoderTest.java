@@ -38,7 +38,7 @@ class MessageEncoderTest {
     @Test
     void encodeTestWithInvalidObject() throws EncodeException {
         MessageEncoder encoder = new MessageEncoder();
-        // Tworzymy mocka, który rzuca wyjątek przy serializacji
+        // Mock to throw exception during serialization
         WebsocketHelperDTO dto = mock(WebsocketHelperDTO.class);
         when(dto.getChatId()).thenThrow(new RuntimeException("Serialization error"));
         String json = encoder.encode(dto);

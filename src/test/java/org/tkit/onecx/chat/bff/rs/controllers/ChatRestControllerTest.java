@@ -1173,6 +1173,7 @@ public class ChatRestControllerTest extends AbstractTest {
 
     @Test
     void removeParticipantThrowsExceptionTest() {
+        // TODO adjust test when participant removal in SVC will be implemented in Controller
         String chatId = "testChatId";
         String participantId = "testParticipantId";
 

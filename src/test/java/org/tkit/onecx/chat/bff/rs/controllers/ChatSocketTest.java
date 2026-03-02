@@ -57,12 +57,18 @@ class ChatSocketTest {
         MessageDTO messageDTO = new MessageDTO();
         // No session for user4
         chatSocket.sendMessage(List.of("user4"), "chatId", messageDTO);
-        // Should not throw
+
+        // Assert: asyncRemote should NOT be called
+        verify(asyncRemote, never())
+                .sendObject(any(WebsocketHelperDTO.class), any(SendHandler.class));
+
+        // Assert: sessions map should still not contain user4
+        assertFalse(chatSocket.sessions.containsKey("user4"));
     }
 
     @Test
     void testSendMessageWithExceptionBranch() {
-        // Przechwyć SendHandler i wywołaj z mockiem SendResult z wyjątkiem
+        // Catch SendHandler mock with SendResult that has an exception
         doAnswer(invocation -> {
             Object[] args = invocation.getArguments();
             SendHandler handler = (SendHandler) args[1];
